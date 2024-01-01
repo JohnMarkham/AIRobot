@@ -1,6 +1,7 @@
 # AIRobot
 chatGPT controller simple prototype robot.
 
+https://vimeo.com/manage/videos/898588452
 
 https://www.youtube.com/watch?v=XoMICkLN2Cc
 
