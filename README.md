@@ -1,11 +1,12 @@
 # AIRobot
-chatGPT controller simple prototype robot.
+ChatGPT controller simple prototype robot.
 
+You pass an objective written in clear English, as a parameter to the robot. It passes the command to ChatGPT, then ChatGPT will issue directions to the robot to achieve the objective. Directions are {forward, backward, left, right, and found}. That's it, very simple!
+## Video Examples
 https://vimeo.com/manage/videos/898588452
 
 https://www.youtube.com/watch?v=XoMICkLN2Cc
 
-Basically, you pass an objective written in clear English, as a parameter to the robot, it passes this to chatGPT, and chatGPT will issue directions to the robot to achieve the objective, directions are in the set {forward, backward, left, right, found}. That's it, very simple.
 ## Running Locally
 ### Installing Dependencies
 **NOTE**: This assumes you have Python3 installed. If you do not install it from here: https://www.python.org/downloads/
@@ -35,7 +36,7 @@ python3 -m pip install openai
 ```
 python3 -m pip install picamera
 ```
-### Running Scripts
+### Running
 #### GIT Scripts
 You can use the tool GIT to easily download all the scripts to your computer:
 ```
@@ -45,7 +46,7 @@ Then enter the file with this command:
 ```
 cd AIRobot
 ```
-#### Running
+#### Running the Robot
 You are ready to begin:
 ```
 python3 comms.py
