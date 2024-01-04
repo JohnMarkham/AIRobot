@@ -10,10 +10,10 @@ from picamera import PiCamera
 
 class Robot():
     context = """Context: You will control a robot by issuing simple instructions based on images that you are fed, and a mission you are given.
-    The instructions you give are in the set (forward, backward, stop, left, right, found).
-    Your reponse is limited to values in that instruction set, you cannot respond with any other word."""
-    limits = """When you can't see the object you are looking for you need to turn in a consistent direction until you find the object.
-    so for example, if you decide to turn left, then you should continue to turn left until such time as you are given an image of the object that you are seeking."""
+    Your instructions are in the set (forward, backward, stop, left, right, found).
+    Your response is limited to values in that instruction set, you cannot respond with any other word."""
+    limits = """ When you can't see the object you are looking for you need to turn in a consistent direction until you find the object.
+    so for example, if you decide to turn left, then you should continue to turn left until you are given an image of the object that you are seeking."""
     instruction_timer = 0.15
 
     def __init__(self, objective: str):
@@ -21,7 +21,7 @@ class Robot():
         self.complete = False
         self.objective = objective
         self.mission = Robot.context + self.objective + Robot.limits
-        # Set up initial conversation with ChatGPT
+        # Set up an initial conversation with ChatGPT (Change the information below to match your OpenAI account information, (organization, api_key, etc).
         self.client= OpenAI()
         self.organization = "organization"
         self.org = os.environ.get(self.organization)
@@ -39,14 +39,14 @@ class Robot():
 
     def execute(self, instruction: str):
         """
-        User getattr on the parameter instruciton to execute method.
+        User getattr on the parameter instruction to execute method.
 
         """
         getattr(self,instruction)()
         time.sleep(Robot.instruction_timer)
         self.stop()
 
-
+    #Define Functions:
     def forward(self):
         controller.motor_forward()
 
@@ -71,6 +71,7 @@ class Robot():
         """
         self.encoded_image = self.snap()
         response = self.client.chat.completions.create(
+            #If you receive an error message make sure you have access to this model: https://help.openai.com/en/articles/7102672-how-can-i-access-gpt-4 
             model="gpt-4-vision-preview",
             messages=[
                 {
@@ -88,7 +89,7 @@ class Robot():
         )
         r=response.model_dump()
         instruction = r['choices'][0]['message']['content']
-        print(f"The instruction from chatGPT is {instruction}")
+        print(f"The instruction from ChatGPT is {instruction}")
         return instruction
 
     def snap(self):
